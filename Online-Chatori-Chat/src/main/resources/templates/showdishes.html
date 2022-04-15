@@ -1,0 +1,72 @@
+ <!DOCTYPE html>
+<html  lang="eg" xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org"
+	   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+      
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<title>Show All Available Dishes</title>
+
+<link rel="stylesheet" th:href="@{/css/all.css}"/>
+</head>
+<body>
+  
+  <!-- header bar -->
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <a class="navbar-brand" th:href="@{/CProfile/{RestorentId}(RestorentId=${restorent.RestorentId})}">Deshboard</a>
+	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	         <span class="navbar-toggler-icon"></span>
+	    </button>
+   </nav><br>
+   
+   <!-- success message -->
+    <div class="container">
+	  <div th:if="${dishsuccessmessage!=null}" class="alert alert-success alert-dismissible">
+	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <span class="alert alert-success text-center" th:text="${dishsuccessmessage}"></span>
+	  </div>
+	</div>
+     <!-- delete dish success message -->
+    <div class="container">
+	  <div th:if="${deletedishmessage!=null}" class="alert alert-success alert-dismissible">
+	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <span class="alert alert-success text-center" th:text="${deletedishmessage}"></span>
+	  </div>
+	</div>
+
+<!-- 		pringting all available dishes -->
+ <div class="container">
+  <div class="card-deck my-3">
+	<div  th:each="dish: ${dishes}" class="card container mt-5 shadow p-3 mb-5 bg-white rounded"  style="width: 18rem;">		  
+		  <h3 class="container">Dish Detail</h3><hr />
+		  <img  th:src="@{'/img/dishes/'+${dish.dishImage}}" alt="dishes images" />
+
+		  <div class="card-body">
+			   Dish-Id:- <h5 class="card-title" th:text="${dish.dishid}">Card title</h5><hr />
+			   Plan-Expiry-Date:- <h5 class="card-title" th:text="${dish.dishPrice}">Card title</h5><hr />
+			  <a href="#" th:href="@{/deletedish(id=${dish.dishid})}" class="btn btn-danger ml-2">Delete</a>
+		  </div>
+	   </div>
+   </div>
+</div>
+
+</body>
+</html>

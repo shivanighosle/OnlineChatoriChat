@@ -1,0 +1,81 @@
+ <!DOCTYPE html>
+<html  lang="eg" xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org"
+	   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+        
+<link th:href="@{/css/all.css}" rel="stylesheet" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+	    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+	    crossorigin="anonymous"></script>
+	    
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>        
+        
+<script type="text/javascript"  th:src="@{/js/buy.js}"></script> 
+
+<title>Show All Available Dishes  To User</title>
+<style> 
+  body{ background: #EECDA3; }
+   </style>
+</head>
+<body>
+  
+  <!-- header bar -->
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#" th:href="@{/UserHome}">DashBoard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+<br />
+  
+<!-- 		pringting all available dishes -->
+  <section class="container">
+  	
+  	<div class="card">
+  		
+  		<div class="card-body">
+  			
+  			<h1 class="text-center">ORDER'S</h1>
+  			   <table class="table">
+			
+		     <thead class="thead-dark">
+			  
+			    <tr>
+			      <th scope="col">ID</th>
+			      <th scope="col">MESSAGE</th>
+			      <th scope="col">ORDERID</th>
+			      <th scope="col">USERID</th>				      
+			    </tr>
+		
+			 </thead>
+	    
+  	           <tbody>
+  	              <tr th:each=" user:${order}">
+  	              	
+  	              	<td th:text="${user.id}"></td>
+  	              	<td th:text="${user.message}"></td>
+  	              	<td th:text="${user.orderid}"></td>
+  	              	<td th:text="${user.userId}"></td>  	             
+  	              
+  	              </tr>	
+  	          </tbody> 
+  	           	           
+  	    </table>
+  	  </div>
+    </div>   
+ </section>				
+</body>
+</html>

@@ -1,0 +1,76 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+<title>Deshborad</title>
+<link rel="stylesheet" href="/css/all.css" th:href="@{/css/all.css}" />
+</head>
+
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/CProfile/{RestorentId}(RestorentId=${restorent.RestorentId})}">Deshboard</a>
+  </nav>
+	
+<!-- add restrorent card started from here -->
+<div class="container mt-4">
+    
+        <div class="card">
+            
+            <h4 class="card-header text-center">Add New Dish </h4>
+        
+            <div class="card-body">
+            
+              <form role="form" data-toggle="validator" action="#" th:action="@{/SaveDish/{RestorentId}(RestorentId=${restorent.RestorentId})}" th:object="${dish}" method="post"  >
+              
+                <input type="hidden" th:value="${RestorentId}" />
+                
+                    <div class="form-group">                   
+	                    <label>Dhish Name</label>
+	                    <input type="text" 
+	                           th:field="*{dishName}"
+	                           name="name"
+	                           class="form-control" 
+	                           placeholder="Enter dish name " autocomplete="off" required>
+		             </div>
+	               
+	                 <div class="form-group">
+	                      <label>Price</label>
+	                      <input type="number"
+	                             th:field="*{dishPrice}"
+	                             name="price" 
+	                             class="form-control" 
+	                             placeholder="Enter base price" autocomplete="off" required>
+	                 </div>
+	
+	                <div class="form-group">
+	                  <label for="image">Dish Image</label><br>
+	                      <input type="file" 
+	                             id="myFile"
+	                             name="image" 
+	                             th:field="*{dishImage}" autocomplete="off" required>
+	               </div><br>
+              
+                <div class="form-group">
+                    <input type="hidden" th:field="*{dishid}" />
+                    <button type="submit"  class="btn btn-primary btn-block"> Save </button>
+                </div>  
+                    
+             </form>
+          
+           </div>
+       
+        </div>
+       
+    </div>
+    
+</body>
+</html>

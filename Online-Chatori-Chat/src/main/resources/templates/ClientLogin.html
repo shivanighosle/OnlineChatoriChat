@@ -1,0 +1,93 @@
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Login </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+    
+<link rel="stylesheet" href="/css/all.css" />
+<script type="text/javascript" th:src="@{/js/all.js}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+     <!-- success message -->
+    <div class="container">
+	  <div th:if="${message!=null}" class="alert alert-success alert-dismissible">
+	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <span class="alert alert-success text-center" th:text="${message}"></span>
+	  </div>
+	</div>
+    
+    <!-- failure message -->
+    <div class="container">
+	  <div th:if="${message1!=null}" class="alert alert-danger alert-dismissible">
+	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <span class="alert alert-danger text-center" th:text="${message1}"></span>
+	  </div>
+	</div>
+    
+    <div class="size container mt-5">
+        
+        <div class="card">
+            
+            <h4 class="card-header text-center">Client Long In </h4>
+            
+            <div class="card-body">
+                <form role="form" data-toggle="validator" action="#" th:action="@{/ClientLoginAuth}" th:object="${client}" method="Post">
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" 
+                               name="email"
+                               class="form-control" 
+                               id="inputEmail" 
+                               placeholder="Email" required>
+
+                        <!-- Error -->
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="form-group">
+                            <input type="password" 
+                                   name="password"
+                                   data-minlength="4" 
+                                   class="form-control" id="inputPassword"
+                                   data-error="Have atleast 4 characters" 
+                                   placeholder="Password" required />
+
+                            <!-- Error -->
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>OTP</label>
+                        <div class="form-group">
+                            <input type="text" 
+                                   name="otp"
+                                   data-minlength="4" 
+                                   class="form-control" id="inputPassword"
+                                   data-error="Have atleast 4 characters" 
+                                   placeholder="OTP" required />
+
+                            <!-- Error -->
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

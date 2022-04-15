@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html  lang="eg" xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org"
+	   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/css/all.css" />
+<script type="text/javascript" th:src="@{/js/all.js}"></script>
+<title>Deshborad</title>
+</head>
+<body>
+   
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Deshboard</a>
+	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	         <span class="navbar-toggler-icon"></span>
+	    </button>
+    
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
+	      <ul class="navbar-nav mr-auto">
+	          <li class="nav-item dropdown">
+		         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		           Restorent
+		         </a>
+		         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		           <a class="dropdown-item" th:href="@{/editRestro/{RestorentId}(RestorentId=${restorent.RestorentId})}">Edit Restro</a>
+		           
+		           <a class="dropdown-item" th:href="@{/dish/{RestorentId}(RestorentId=${restorent.RestorentId})}">Add Dishes</a>
+		           <a class="dropdown-item" th:href="@{/showdishes/{RestorentId}(RestorentId=${restorent.RestorentId})}">View Dishes</a>	
+		         </div>
+		       </li>
+         
+               <li class="nav-item">
+                  <a class="nav-link" th:href="@{/ViewOrder}">View Order</a>
+               </li>
+               
+               <li class="nav-item">
+                  <a class="nav-link" th:href="@{/client-notification}">Notification</a>
+               </li>
+	       
+	        <li class="nav-item dropdown">
+	          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	            MyAccount
+	          </a>
+	          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	            <a class="dropdown-item" th:href="@{/myplan}">My Plan</a>
+	            <a class="dropdown-item" th:href="@{/renewmyplan}">Renew Plan</a>	
+	            <div class="dropdown-divider"></div>
+	            <a class="dropdown-item" th:href="@{/clientlogout}">LogOut</a>
+		      </div>
+	      </li>
+      </ul>
+    </div>
+ </nav>
+  
+ <!-- success message  -->
+ <div class="container">
+  <div th:if="${profilesuccessmessage!=null}" class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span class="alert alert-success text-center" th:text="${profilesuccessmessage}"></span>
+  </div>
+</div>
+
+<!-- renew plan success message  -->
+ <div class="container">
+  <div th:if="${renewexpireplan!=null}" class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span class="alert alert-success text-center" th:text="${renewexpireplan}"></span>
+  </div>
+</div>
+
+ <!-- restorent image -->
+ <img style="width:100%;height:100%;"src="/img/restorents/jomato.jpg" alt="restorent image" />
+</body>
+</html>

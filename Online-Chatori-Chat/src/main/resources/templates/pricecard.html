@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link th:href="@{/css/all.css}" rel="stylesheet" />
+<script type="text/javascript"  th:src="@{/js/pay.js}"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+	    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+	    crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<title>client membership</title>
+
+</head>
+<body>
+   <!-- success message -->
+    <div class="container">
+	  <div th:if="${pricecardsuccessmessage!=null}" class="alert alert-success alert-dismissible">
+	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <span class="alert alert-success text-center" th:text="${pricecardsuccessmessage}"></span>
+	  </div>
+	</div>
+  
+    <!--- expiry date  message --->	
+	<div class="container">
+	  <div th:if="${planexpire!=null}" class="alert alert-danger alert-dismissible">
+	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <span class="alert alert-danger text-center" th:text="${planexpire}"></span>
+	  </div>
+	</div>
+	
+	<div style="text-align:center;">
+		<h1>Choose Plan</h1>
+		<h6 >Membership For Restorent Opening</h6>
+		<p >Choose Any One Of Them And Get Started</p>
+	</div>
+	
+
+		<div class="columns">
+		  <ul class="price">
+		    <li class="header">Basic</li>
+		    <li class="grey">₹1 / 1-Month</li>
+		    <li>Free Support</li>
+		    <li>Some Extra Feature</li>
+		    <li>10GB Storage</li>
+		    <li>10 Emails</li>
+		    <li class="grey">
+		    	<input id="payment_field" value="1" type="hidden" />
+		    	<button onclick="paymentStart()" type="button" class="btn btn-success">Buy Now</button>
+		    </li>
+		  </ul>
+		</div>
+		
+		<div class="columns">
+		  <ul class="price">
+		    <li class="header">Pro</li>
+		    <li class="grey">₹2 / 2-Month</li>
+		    <li>Free Support</li>
+		    <li>Extra Feature</li>
+		    <li>Customer Case Support</li>
+		    <li>Live Update</li>
+		    <li class="grey"><a href="#" class="button">Buy Now</a></li>
+		  </ul>
+		</div>
+		
+		<div class="columns">
+		  <ul class="price">
+		    <li class="header">Premium</li>
+		    <li class="grey">₹3 / 3-Month</li>
+		    <li>Free Support</li>
+		    <li>Extra Feature</li>
+		    <li>24/7 Support</li>
+		    <li>Special offer</li>
+		    <li class="grey"><a href="#" class="button">Buy Now</a></li>
+		  </ul>
+		</div>
+</body>
+</html>

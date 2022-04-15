@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+  <title>user sign up form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+  body {
+      background: #EECDA3;
+  }
+  /* The message box is shown when the user clicks on the password field */
+    #message {
+      width: 50%;
+      display:none;
+      background: #f1f1f1;
+      color: #000;
+      position: relative;
+      padding: 20px;
+      margin-top: 10px;
+    }
+
+    #message p {
+      padding: 10px 35px;
+      font-size: 18px;
+    }
+
+  /* Add a green text color and a checkmark when the requirements are right */
+  .valid {
+    color: green;
+  }
+
+  .valid:before {
+    position: relative;
+    left: -35px;
+    content: "✔";
+  }
+  /* Add a red text color and an "x" when the requirements are wrong */
+  .invalid {
+    color: red;
+  }
+
+  .invalid:before {
+    position: relative;
+    left: -35px;
+    content: "✖";
+  }
+  .size {
+      max-width: 550px;
+  }
+
+  .has-error label,
+  .has-error input,
+  .has-error textarea {
+      color: red;
+      border-color: red;
+  }
+
+  .list-unstyled li {
+      font-size: 13px;
+      padding: 4px 0 0;
+      color: red;
+  }
+    </style>
+</head>
+<body>  
+ <div class="container">
+  <div th:if="${errormessage!=null}" class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span class="alert alert-danger text-center" th:text="${errormessage}"></span>
+  </div>
+</div>
+  
+  <div class="size container mt-5">
+     <div class="card">
+         
+         <h5 class="card-header text-center">User Sign Up</h5>
+           
+	        <div class="card-body">
+                 
+                 <form role="form" data-toggle="validator" action="#" th:action="@{/SaveUser}" th:object="${user}" method="post">
+                   
+                   <div class="form-group">
+                       <label>Full Name</label>
+                       <input type="hidden" th:field="*{id}" />
+                       <input type="text"
+                              name="name"
+                              th:field="*{name}"
+                              class="form-control"
+                              data-error="You must have a name."
+                              id="inputName"
+                              placeholder="Full Name" required>
+
+                       <!-- Error -->
+                       <div class="help-block with-errors"></div>
+                   </div>
+                   
+                   <div class="form-group">
+                       <label>Email</label>
+                       <input type="email"
+                              name="email"
+                              th:field="*{email}"
+                              min="20"
+                              pattern=".+@gmail\.com"
+                              class="form-control"
+                              id="inputEmail"
+                              title="Only Gmail.com are allowed"
+                              placeholder="username@gmail.com allowed only" required>
+
+                       <!-- Error -->
+                       <div class="help-block with-errors">
+                       </div>
+                   </div>
+
+
+                   <div class="form-group">
+                       <label>Password</label>
+                           <input type="password"
+                                  id="psw"
+                                  class="form-control"
+                                  th:field="*{password}"
+                                  name="psw"
+                                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                  placeholder="Password"
+                                  required>
+
+                           <!-- Error -->
+                        <div class="help-block with-errors"></div>
+                   </div>
+
+                   <div class="form-group">
+						<label>CAPTCHA</label><br>
+						<img th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}"/>
+						
+				</div>
+	
+				<div class="form-group">
+						<label>ENTER CAPTCHA</label>
+						<input type="hidden" th:field="*{hiddenCaptcha}"/>
+						<input type="text" th:field="*{captcha}" class="form-control"/>
+				</div>
+                       <p class="alert alert-danger" th:if="${#fields.hasErrors('captcha')}" th:errors="*{captcha}">
+                     
+                       <div class="form-group">
+                       <button type="submit" class="btn btn-primary btn-block">SignUp</button>
+                   </div>
+               </form>
+           </div>
+          
+       </div>
+    </div>
+
+    <div id="message" class="size container" >
+        <h3>Password must contain the following:</h3>
+        <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+        <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+        <p id="number" class="invalid">A <b>number</b></p>
+        <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+</div>
+
+
+<script>
+var myInput = document.getElementById("psw");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+
+  // Validate length
+  if(myInput.value.length >= 5) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+</script>
+</body>
+</html>
